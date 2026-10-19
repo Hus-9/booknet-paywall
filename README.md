@@ -1,6 +1,6 @@
 # BookNet - Digital Library with Paywall
 
-A digital reading pllatform (books, manga, comics, magazines, audiobook) with free and premium  access tiers, built in a team of 5 during a two-week HackCamp at the University of Salford (Dec 2025) for a real client brief from ABL.
+A digital reading platform (books, manga, comics, magazines, audiobooks) with free and premium  access tiers, built in a team of 5 during a two-week HackCamp at the University of Salford (Dec 2025) for a real client brief from ABL.
 
 ## Tech Stack
 PHP · SQLite · JavaScript · HTML/CSS · MVC · XAMPP
@@ -12,9 +12,9 @@ PHP · SQLite · JavaScript · HTML/CSS · MVC · XAMPP
 - Admin dashboard
 
 ## My Contribution
-- Co-built the paywall and built role-based access control ('permission.php')
+- Co-built the paywall and built role-based access control (`permissions.php`)
 - Fixed a security gap where free users could bypass the paywall via direct URLs
-- Built the books page and integrated the team's page into one system
+- Built the books page and integrated the team's pages into one system
 
 ## Screenshots
 
@@ -31,7 +31,7 @@ PHP · SQLite · JavaScript · HTML/CSS · MVC · XAMPP
 ## How to run
 1. Install XAMPP and copy this folder into 'C:\xampp\htdocs\'
 2. Start Apache in XAMPP
-3. Open http://localhost/HackCamp-14/
+3. Open http://localhost/booknet-paywall/
 
 ## Team
 Husnain Hussain, Max Hinchliffe, Oliver Smith, Enai Kilete, Miqdad Issa

@@ -1,0 +1,28 @@
+<?php require('template/header.phtml') ?>
+    <link rel="stylesheet" href="css_store/adminstyles.css">
+    <div class="container mt-4">
+        <h2 class="text-white">Welcome to the Admin Dashboard</h2>
+
+        <div class="table-responsive">
+            <table class="table table-dark table-bordered table-striped align-middle shadow-sm rounded-3">
+                <thead class="table-light text-dark">
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if (!empty($view->admins)): ?>
+                    <?php foreach ($view->admins as $admin): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($admin->getUsername()); ?></td>
+                            <td><?php echo htmlspecialchars($admin->getRole()); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<?php require('template/footer.phtml') ?>

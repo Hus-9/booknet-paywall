@@ -1,0 +1,341 @@
+<style>
+    /* Body and page background */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #6b73ff, #000dff);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    /* Logged-in box */
+    .logged-in-box {
+        margin: 30px auto;
+        padding: 15px 25px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        max-width: 550px;
+        color: #fff;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        backdrop-filter: blur(8px);
+    }
+
+    .login-msg {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #e4e8ff;
+        line-height: 1.4;
+    }
+
+    .upgrade-btn {
+        background: #28a745;
+        padding: 10px 18px;
+        border-radius: 8px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.25s;
+        white-space: nowrap;
+    }
+
+    .upgrade-btn:hover {
+        background: #1f8c3a;
+        transform: translateY(-2px);
+    }
+
+    .logout-btn {
+        background: #0050ff;
+        border: none;
+        padding: 10px 22px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+        white-space: nowrap;
+    }
+
+    .logout-btn:hover {
+        background: #003cd1;
+        transform: translateY(-2px);
+    }
+
+    /* Session message */
+    p.text-info {
+        max-width: 500px;
+        margin: 10px auto 20px;
+        padding: 12px 15px;
+        border-radius: 10px;
+        background-color: rgba(255,255,255,0.2);
+        color: #fff;
+        font-weight: 500;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Modal shared styles */
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.65);
+        display: none;
+        backdrop-filter: blur(6px);
+        z-index: 999;
+    }
+
+    .modal-wrapper {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 1000;
+    }
+
+    /* Glassy auth modal (both login + signup) */
+    .auth-modal {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(255,255,255,0.1);
+        padding: 30px 28px;
+        border-radius: 18px;
+        text-align: center;
+        color: white;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+        animation: scaleIn 0.35s ease, fadeIn 0.35s ease;
+        position: relative;
+    }
+
+    .auth-modal h2 {
+        margin-bottom: 18px;
+        font-size: 1.4rem;
+    }
+
+    /* Glassy, clean inputs inside modals */
+    .auth-modal label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: #cce0ff;
+        text-align: left;
+    }
+
+    .auth-modal input[type="text"],
+    .auth-modal input[type="password"],
+    .auth-modal input[type="email"] {
+        width: 100%;
+        padding: 11px 14px;
+        margin-bottom: 16px;
+        border: none;
+        border-radius: 10px;
+        background-color: rgba(255,255,255,0.15);
+        color: #fff;
+        font-size: 0.95rem;
+        transition: 0.3s;
+    }
+
+    .auth-modal input[type="text"]:focus,
+    .auth-modal input[type="password"]:focus,
+    .auth-modal input[type="email"]:focus {
+        background-color: rgba(255,255,255,0.25);
+        box-shadow: 0 0 10px rgba(255,255,255,0.6);
+        outline: none;
+    }
+
+    .auth-modal input[type="submit"] {
+        width: 100%;
+        padding: 11px 0;
+        background: linear-gradient(135deg, #6b73ff, #000dff);
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 4px;
+    }
+
+    .auth-modal input[type="submit"]:hover {
+        background: linear-gradient(135deg, #000dff, #6b73ff);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 16px;
+        font-size: 26px;
+        cursor: pointer;
+        color: white;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+        from { transform: scale(0.92); }
+        to { transform: scale(1); }
+    }
+</style>
+
+<?php require('template/header.phtml'); ?>
+
+<h2>Welcome to BookNet</h2>
+<h3>This is the Official website for <i>BookNet</i>.</h3>
+
+<p class="text-light mt-3">
+    BookNet is an all-in-one digital library platform designed to bring readers closer to the stories,
+    knowledge, and entertainment they love.
+</p>
+
+<p class="text-light">
+    Whether you're browsing novels, audiobooks, magazines, comics, or manga, BookNet makes discovering content simple.
+</p>
+
+<?php
+// Show session messages
+if (isset($_SESSION["message"])) {
+    echo "<p class='text-info'>" . htmlspecialchars($_SESSION["message"]) . "</p>";
+    unset($_SESSION["message"]);
+}
+?>
+
+<?php if (!isset($_SESSION["login"])): ?>
+
+    <!-- LOGIN + SIGNUP BUTTONS -->
+    <div class="text-center mt-4">
+        <button id="openLogin" class="btn btn-light px-4 py-2 me-2" style="border-radius:10px; font-weight:600;">
+            Login
+        </button>
+        <button id="openSignup" class="btn btn-outline-light px-4 py-2" style="border-radius:10px; font-weight:600;">
+            Sign Up
+        </button>
+    </div>
+
+    <!-- Dark overlay for modals -->
+    <div id="authOverlay" class="overlay"></div>
+
+    <!-- LOGIN MODAL (glassy) -->
+    <div id="loginModalWrapper" class="modal-wrapper">
+        <div class="auth-modal">
+            <span id="closeLogin" class="close-btn">&times;</span>
+            <h2>Login to BookNet</h2>
+
+            <form method="post" action="" class="text-primary" style="margin-top:10px;">
+                <label for="login_username">Username</label>
+                <input type="text" id="login_username" name="username" required autocomplete="off">
+
+                <label for="login_password">Password</label>
+                <input type="password" id="login_password" name="password" required autocomplete="current-password">
+
+                <input type="submit" name="loginbutton" value="Login">
+            </form>
+        </div>
+    </div>
+
+    <!-- SIGNUP MODAL (also glassy) -->
+    <div id="signupModalWrapper" class="modal-wrapper">
+        <div class="auth-modal">
+            <span id="closeSignup" class="close-btn">&times;</span>
+            <h2>Create your BookNet account</h2>
+
+            <form method="post" action="signup.php" class="text-primary" style="margin-top:10px;">
+                <label for="su_username">Username</label>
+                <input type="text" id="su_username" name="username" required autocomplete="off">
+
+                <label for="su_email">Email</label>
+                <input type="email" id="su_email" name="email" required autocomplete="off">
+
+                <label for="su_password">Password</label>
+                <input type="password" id="su_password" name="password" required autocomplete="new-password">
+
+                <label for="su_confirm">Confirm Password</label>
+                <input type="password" id="su_confirm" name="confirm_password" required autocomplete="new-password">
+
+                <input type="submit" name="signupbutton" value="Sign Up">
+            </form>
+        </div>
+    </div>
+
+<?php else: ?>
+
+    <!-- LOGGED-IN BOX WITH ROLE + UPGRADE + LOGOUT -->
+    <div class="logged-in-box">
+        <span class="login-msg">
+            You are logged in as <?= htmlspecialchars($_SESSION["login"]) ?><br>
+            <small style="font-size:0.85rem; color:#c9d3ff;">
+                Role:
+                <?php if (isset($_SESSION["role"])) {
+                    echo htmlspecialchars($_SESSION["role"]);
+                } else {
+                    echo 'Free';
+                }
+                ?>
+            </small>
+        </span>
+
+        <!-- Show Upgrade button unless user is BookNet Pro -->
+        <?php
+        if (!isset($_SESSION["role"]) || ($_SESSION["role"] !== "BookNet Pro" && $_SESSION["role"] !== "Admin")): ?>
+            <a href="paywall.php" class="upgrade-btn">Upgrade</a>
+        <?php endif; ?>
+
+
+        <form method="post" action="" style="margin:0;">
+            <button type="submit" name="logoutbutton" class="logout-btn">Logout</button>
+        </form>
+    </div>
+
+<?php endif; ?>
+
+<script>
+    const overlay = document.getElementById("authOverlay");
+    const loginModal = document.getElementById("loginModalWrapper");
+    const signupModal = document.getElementById("signupModalWrapper");
+
+    function openModal(which) {
+        if (!overlay || !loginModal || !signupModal) return;
+
+        overlay.style.display = "block";
+        if (which === "login") loginModal.style.display = "flex";
+        if (which === "signup") signupModal.style.display = "flex";
+    }
+
+    function closeModals() {
+        if (!overlay || !loginModal || !signupModal) return;
+
+        overlay.style.display = "none";
+        loginModal.style.display = "none";
+        signupModal.style.display = "none";
+    }
+
+    document.getElementById("openLogin")?.addEventListener("click", () => openModal("login"));
+    document.getElementById("openSignup")?.addEventListener("click", () => openModal("signup"));
+    document.getElementById("closeLogin")?.addEventListener("click", closeModals);
+    document.getElementById("closeSignup")?.addEventListener("click", closeModals);
+
+    if (overlay) {
+        overlay.addEventListener("click", closeModals);
+    }
+
+    // Optional: close on ESC
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeModals();
+        }
+    });
+</script>
+
+<?php require('template/footer.phtml'); ?>

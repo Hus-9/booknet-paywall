@@ -1,0 +1,360 @@
+/* Book style: paper-like reader panel */
+.book {
+    background: #fdf8ed;
+    color: #2c1a0c;
+    border: 1px solid #e6dcc7;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.book::before,
+.book::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0));
+    pointer-events: none;
+}
+
+.book::before { left: 0; }
+.book::after { right: 0; transform: scaleX(-1); }
+
+.book .card-body {
+    background: transparent;
+}
+
+.book .reader-text {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: inherit;
+}
+
+.panel-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+.panel-line{
+    padding:10px 12px;
+    border-radius:8px;
+    background:rgba(0,0,0,0.03);
+    border:1px dashed rgba(0,0,0,0.1);
+    font-family:"Inter","Google Sans",system-ui,sans-serif;
+    color:#2c1a0c;
+}
+
+/* Comic reader layout */
+.comic-reader-container{
+    max-width: 1100px;
+    margin: 32px auto 48px;
+    padding: 0 16px;
+    color: #f9fafb;
+}
+
+.comic-reader-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+.back-link{
+    color:#b7c6db;
+    text-decoration:none;
+    font-weight:600;
+}
+.back-link:hover{color:#e8effb;}
+
+.badge-chip{
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:12px;
+    letter-spacing:0.03em;
+    border:1px solid rgba(255,255,255,0.12);
+    background:rgba(255,255,255,0.06);
+    color:#e8effb;
+}
+.badge-chip--premium{
+    background:rgba(70,196,125,0.18);
+    border-color:rgba(70,196,125,0.35);
+    color:#a3f7c7;
+}
+.badge-chip--free{
+    background:rgba(255,188,73,0.14);
+    border-color:rgba(255,188,73,0.32);
+    color:#ffdca0;
+}
+
+.comic-meta h1{
+    font-size: 2rem;
+    margin-bottom: 4px;
+}
+.comic-author{
+    color:#cdd5e1;
+    margin:0 0 4px;
+}
+.comic-page-indicator{
+    font-size:0.9rem;
+    color:#9ca3af;
+}
+
+.comic-page{
+    margin-top:16px;
+}
+.comic-page-inner{
+    background: #111827;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.comic-panel{
+    background: #1f2933;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    border: 1px solid #4b5563;
+}
+.comic-panel p{
+    margin:0;
+    font-size:1rem;
+    line-height:1.5;
+}
+
+.comic-upgrade-banner{
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #111827;
+    border: 1px solid #f97316;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+}
+.comic-upgrade-banner .btn-upgrade{
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: #f97316;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.comic-reader-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 12px;
+    color:#f9fafb;
+}
+.comic-reader-nav .nav-btn{
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: none;
+    background: #4b5563;
+    color: #f9fafb;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+.comic-reader-nav .nav-btn.primary{
+    background: #f97316;
+}
+.comic-reader-nav .disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Reader layout inspired by modern ebook (Audible/Kindle-like) */
+.reader-wrap{
+    max-width:1100px;
+    margin:0 auto 40px;
+    padding:30px 20px 40px;
+}
+
+.reader-hero{
+    display:grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap:28px;
+    align-items:center;
+    background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06), transparent 35%),
+                radial-gradient(circle at 80% 0%, rgba(255,255,255,0.05), transparent 40%),
+                linear-gradient(135deg, #10141b, #1c232e 60%, #10141b);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:16px;
+    padding:28px 28px;
+    box-shadow:0 16px 42px rgba(0,0,0,0.35);
+}
+
+.reader-hero__meta h1{
+    color:#f8f9fb;
+    font-size:32px;
+    margin:6px 0 4px;
+    letter-spacing:-0.2px;
+}
+.reader-hero__meta .author{
+    color:#cdd5e1;
+    margin-bottom:12px;
+    font-size:15px;
+}
+
+.reader-hero__meta .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.chip{
+    padding:6px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.08);
+    color:#e8edf5;
+    font-size:12px;
+    letter-spacing:0.02em;
+}
+.chip--premium{background:rgba(70, 196, 125, 0.2); color:#9df0bf; border:1px solid rgba(70,196,125,0.35);}
+.chip--free{background:rgba(255, 188, 73, 0.18); color:#ffd9a1; border:1px solid rgba(255,188,73,0.32);}
+
+.page-meta{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+}
+.pill{
+    background:rgba(255,255,255,0.06);
+    color:#cdd5e1;
+    border:1px solid rgba(255,255,255,0.08);
+    padding:6px 12px;
+    border-radius:10px;
+    font-size:12px;
+}
+.pill--limit{
+    color:#ffcf7d;
+    border-color:rgba(255,207,125,0.35);
+}
+
+.reader-nav{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin:12px 0;
+}
+.reader-nav--bottom{
+    justify-content:space-between;
+    margin-top:18px;
+}
+
+.btn-primary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 16px;
+    border-radius:10px;
+    border:none;
+    color:#0c1118;
+    background:linear-gradient(135deg,#ffd166,#ff9f1c);
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 8px 20px rgba(255,159,28,0.35);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover{transform:translateY(-1px); box-shadow:0 10px 24px rgba(255,159,28,0.4);}
+
+.btn-ghost{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.1);
+    color:#e4e9f1;
+    background:rgba(255,255,255,0.03);
+    text-decoration:none;
+    font-weight:600;
+    transition:transform 0.2s ease, border-color 0.2s ease;
+}
+.btn-ghost:hover{transform:translateY(-1px); border-color:rgba(255,255,255,0.25);}
+.btn-ghost.disabled{opacity:0.35; pointer-events:none;}
+
+.reader-hero__cover{
+    display:flex;
+    justify-content:flex-end;
+}
+.cover-frame{
+    background:radial-gradient(circle at 30% 20%, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 45%);
+    padding:12px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 14px 38px rgba(0,0,0,0.35);
+}
+.cover-frame img{
+    display:block;
+    width:210px;
+    height:auto;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.crumbs{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#9aadbe;
+    font-size:12px;
+    letter-spacing:0.03em;
+}
+.crumbs a{color:#d9e4f4; text-decoration:none;}
+.crumbs span:last-child{color:#e9eef6;}
+
+.upgrade-banner{
+    margin-top:18px;
+    background:linear-gradient(120deg, rgba(255,207,125,0.18), rgba(255,255,255,0.05));
+    border:1px solid rgba(255,207,125,0.35);
+    border-radius:12px;
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    color:#f6eddc;
+    box-shadow:0 12px 30px rgba(0,0,0,0.25);
+}
+.upgrade-banner .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    font-size:11px;
+    color:#ffdba0;
+    margin:0;
+}
+.upgrade-banner h3{
+    margin:4px 0 6px;
+    font-size:18px;
+    color:#fff8ea;
+}
+.upgrade-banner p{
+    margin:0;
+    color:#f1e6d5;
+    font-size:13px;
+}
+
+@media(max-width:900px){
+    .reader-hero{
+        grid-template-columns:1fr;
+    }
+    .reader-hero__cover{
+        justify-content:flex-start;
+    }
+    .reader-nav--bottom{
+        justify-content:space-between;
+    }
+}

@@ -1,0 +1,37 @@
+<?php
+require('template/header.phtml');
+?>
+    <link rel="stylesheet" href="css_store/indexStyles.css">
+
+    <h2>Create Your BookNet Account</h2>
+    <p class="text-light mt-3">
+        Sign up to join our community of readers. Your account will start with a <b>free</b> role.
+    </p>
+
+<?php
+// Display feedback message
+if (isset($_SESSION["message"])) {
+    echo "<p class='text-info'>" . htmlspecialchars($_SESSION["message"]) . "</p>";
+    unset($_SESSION["message"]);
+}
+?>
+
+    <form method="post" action="" class="form text-primary">
+        <label for="username">Username</label>
+        <input type="text" name="username" required autocomplete="off">
+
+        <label for="email">Email</label>
+        <input type="email" name="email" required autocomplete="off">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="new-password">
+
+        <label for="confirm_password">Confirm Password</label>
+        <input type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password">
+
+        <input type="submit" name="signupbutton" value="Sign Up">
+    </form>
+
+<?php
+require('template/footer.phtml');
+?>

@@ -1,0 +1,61 @@
+<?php require('template/header.phtml') ?>
+
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BookNet</title>
+    <link rel="stylesheet" href="css_store/max_styles.css">
+</head>
+
+<body>
+
+<section class="hero">
+    <h1>BookNet</h1>
+    <h2>Magazine Library</h2>
+    <p>Explore covers and discover your next read.</p>
+</section>
+
+<div class="page">
+
+    <?php if (!empty($view->dbMessage)): ?>
+        <div class="message"><?= $view->dbMessage ?></div>
+    <?php endif; ?>
+
+    <div class="blocks-card">
+
+        <nav class="blocks" aria-label="Magazine covers">
+            <?php foreach ($view->magazine as $index => $magazine):
+
+                $cover = $magazine->getCover();
+                $coverPath = !empty($cover)
+                        ? '/images/'.htmlspecialchars($cover)
+                        : '/images/default-placeholder.png';
+
+                $gradientNum = ($index % 9) + 1;
+                ?>
+
+                <a href="read_magazine.php?id=<?= urlencode($magazine->getID()); ?>"
+                   class="block"
+                   style="--bg: var(--g<?= $gradientNum ?>);">
+
+                    <div class="block__item"
+                         role="img"
+                         aria-label="<?= htmlspecialchars($magazine->getTitle()); ?> cover"
+                         style="background-image:url('<?= $coverPath ?>');">
+                    </div>
+
+                </a>
+
+            <?php endforeach; ?>
+        </nav>
+
+    </div>
+
+</div>
+</body>
+</html>
+
+<?php require('template/footer.phtml') ?>

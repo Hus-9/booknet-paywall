@@ -1,0 +1,116 @@
+/* Makes the whole system dark themed */
+html, body {
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.main-bg {
+    background-color: #383842;
+}
+
+/* Navi. Bar */
+.navbar-dark {
+    background-color: #1f1f1f !important;
+}
+
+/* Container's for the forms */
+.form-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: #1f1f1f;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Text and User Inputs */
+.form-control, .form-select {
+    background-color: #2a2a2a !important;
+    color: #f0f0f0 !important;
+    border: 1px solid #444 !important;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #ff6d00;
+    box-shadow: 0 0 5px rgba(13, 110, 253, 0.3);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #ff6d00;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #ff6d00;
+}
+
+/* Success/Failure messages */
+.alert-success {
+    background-color: #198754;
+    color: #fff;
+}
+
+.alert-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Footer */
+footer.footer {
+    background-color: #1f1f1f !important;
+    color: #b0b0b0;
+    border-top: 1px solid #333;
+}
+
+footer.footer strong {
+    color: #f8f9fa;
+}
+
+footer.footer .text-secondary {
+    color: #9ca3af !important;
+}
+
+/* Makes the tables styled dark */
+table {
+    color: #fff !important;              /* Makes the text in the tables white */
+    background-color: #2b2b2b !important; /* Makes the tables have a dark backing */
+}
+
+table th {
+    color: #fff !important;              /* Makes the table headings white */
+    background-color: #3a3a3a !important; /* Makes the header lighter to increase contrast */
+}
+
+table td {
+    color: #ddd !important;
+}
+
+/* Hover glow effect for navbar links */
+.navbar-nav .nav-link.hover-glow {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar-nav .nav-link.hover-glow::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 50%;
+    bottom: 0;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link.hover-glow:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.navbar-nav .nav-link.hover-glow:hover {
+    color: #ffd700 !important; /* gold on hover */
+    background-color: rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,42 @@
+/* Enhance the Bootstrap table */
+.table {
+    border-radius: 12px; /* Smooth rounded corners */
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+}
+
+.table th {
+    background: linear-gradient(90deg, #4CAF50, #43A047); /* Gradient header */
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+}
+
+.table td {
+    padding: 12px 15px;
+    color: #e0e0e0;
+}
+
+/* Zebra stripes override for dark table */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Make table fully responsive */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Optional: make headers sticky */
+.table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}

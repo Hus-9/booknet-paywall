@@ -1,0 +1,174 @@
+/* -------------------------------------------------------
+   PROFESSIONAL REDESIGN — MANGA GALLERY
+   Keeps hover-expand animation & PHP structure
+------------------------------------------------------- */
+
+:root{
+    --radius: 18px;
+    --transition: 0.25s ease;
+
+    --text-light: #ffffff;
+    --text-dark: #1d1d1d;
+
+    --glass: rgba(255,255,255,0.22);
+
+    --shadow-soft: 0 12px 28px rgba(0,0,0,0.12);
+    --shadow-hover: 0 18px 42px rgba(0,0,0,0.22);
+
+    /* Gradients (block color accents) */
+    --g1: linear-gradient(135deg,#f6d365,#fda085);
+    --g2: linear-gradient(135deg,#a1c4fd,#c2e9fb);
+    --g3: linear-gradient(135deg,#d299c2,#fef9d7);
+    --g4: linear-gradient(135deg,#84fab0,#8fd3f4);
+    --g5: linear-gradient(135deg,#ffecd2,#fcb69f);
+    --g6: linear-gradient(135deg,#fbc2eb,#a6c1ee);
+    --g7: linear-gradient(135deg,#cfd9df,#e2ebf0);
+    --g8: linear-gradient(135deg,#3a3a3a,#1f1f1f);
+    --g9: linear-gradient(135deg,#36d1dc,#5b86e5);
+
+    /* Hover stacking lerp values */
+    --lerp-0: 1;
+    --lerp-1: 0.55;
+    --lerp-2: 0.25;
+    --lerp-3: 0.08;
+    --lerp-4: 0;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+    font-family: "Inter", "Google Sans", system-ui, sans-serif;
+    background: #f2f4f7;
+    color: var(--text-dark);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    overflow-x:hidden;
+}
+
+/* -------------------------------------------------------
+   HERO HEADER — clean book/library aesthetic
+------------------------------------------------------- */
+
+.hero{
+    padding:90px 20px 70px;
+    text-align:center;
+    color:var(--text-light);
+    background:linear-gradient(135deg,#1b1b1b,#2a2a2a);
+    box-shadow:0 8px 28px rgba(0,0,0,0.3);
+}
+
+.hero h1{
+    font-size:46px;
+    font-weight:700;
+    letter-spacing:-0.5px;
+}
+.hero p{
+    margin-top:12px;
+    font-size:18px;
+    opacity:0.85;
+}
+
+/* -------------------------------------------------------
+   PAGE WRAPPER
+------------------------------------------------------- */
+
+.page{
+    max-width:1250px;
+    width:100%;
+    margin:0 auto;
+    padding:50px 22px;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+}
+
+/* -------------------------------------------------------
+   GLASS CARD WRAPPER FOR GALLERY
+------------------------------------------------------- */
+
+.blocks-card{
+    background:var(--glass);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    padding:45px 34px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-soft);
+    display:flex;
+    justify-content:center;
+}
+
+/* -------------------------------------------------------
+   BLOCK WRAPPER
+------------------------------------------------------- */
+
+.blocks{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:36px;
+    max-width:1150px;
+}
+
+/* -------------------------------------------------------
+   BLOCK — cover item with your hover flex animation
+------------------------------------------------------- */
+
+.block {
+    width: 140px;       /* optional, can adjust */
+    height: 140px;      /* taller to match typical manga cover */
+    display: grid;
+    place-items: center;
+    flex: calc(0.25 + (var(--lerp, 0) * 1.5));
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    transition: flex var(--transition), z-index var(--transition);
+}
+
+.block__item {
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;         /* optional softer edges */
+    background-size: contain;     /* keep full cover visible */
+    background-position: center;  /* center the image */
+    background-repeat: no-repeat;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover effect */
+.block:hover .block__item{
+    transform:translateY(-12%);
+    box-shadow:var(--shadow-hover);
+}
+
+/* Stacking order (kept from your original idea) */
+.block:hover{--lerp:var(--lerp-0); z-index:5}
+.block:hover + .block{--lerp:var(--lerp-1); z-index:4}
+.block:hover + .block + .block{--lerp:var(--lerp-2); z-index:3}
+.block:hover + .block + .block + .block{--lerp:var(--lerp-3); z-index:2}
+.block:hover + .block + .block + .block + .block{--lerp:var(--lerp-4); z-index:1}
+
+/* -------------------------------------------------------
+   MESSAGE BOX
+------------------------------------------------------- */
+
+.message{
+    background:#ffffff;
+    padding:18px 22px;
+    border-left:5px solid #4aa3ff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-soft);
+    font-size:15.5px;
+}
+
+/* -------------------------------------------------------
+   RESPONSIVE
+------------------------------------------------------- */
+
+@media(max-width:700px){
+    .hero{padding:65px 20px;}
+    .hero h1{font-size:34px;}
+    .blocks-card{padding:26px;}
+    .block{width:70px;height:70px;}
+}

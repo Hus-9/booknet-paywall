@@ -1,0 +1,61 @@
+<?php require('template/header.phtml') ?>
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>BookNet</title>
+        <link rel="stylesheet" href="css_store/max_styles.css">
+    </head>
+
+    <body>
+
+    <section class="hero">
+        <h1>BookNet</h1>
+        <h2>Comics Library</h2>
+        <p>Explore covers and discover your next read.</p>
+    </section>
+
+    <div class="page">
+
+        <?php if (!empty($view->dbMessage)): ?>
+            <div class="message"><?= $view->dbMessage ?></div>
+        <?php endif; ?>
+
+        <div class="blocks-card">
+
+            <nav class="blocks" aria-label="Manga covers">
+                <?php foreach ($view->comic as $index => $comic):
+
+                    $cover = $comic->getComicCover();
+                    $coverPath = !empty($cover)
+                            ? 'images/' . htmlspecialchars($cover)
+                            : 'images/default-placeholder.png';
+
+                    $gradientNum = ($index % 9) + 1;
+                    ?>
+
+                    <a href="read_comic.php?id=<?= urlencode($comic->getID()); ?>"
+                       class="block"
+                       style="--bg: var(--g<?= $gradientNum ?>);">
+
+                        <div class="block__item"
+                             role="img"
+                             aria-label="<?= htmlspecialchars($comic->getComicTitle()); ?> cover"
+                             style="background-image:url('<?= $coverPath ?>');">
+                        </div>
+
+                    </a>
+
+                <?php endforeach; ?>
+            </nav>
+
+        </div>
+
+    </div>
+    </body>
+    </html>
+
+<?php require('template/footer.phtml') ?>
